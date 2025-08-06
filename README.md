@@ -255,5 +255,5 @@ ItsUrGuy is an anonymous social platform designed specifically for men to share 
  
 
 
-<img src='' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/Itsurguy2/ITSURGUY/blob/Master/itsur%20app.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
