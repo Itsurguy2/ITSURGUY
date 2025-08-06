@@ -1,0 +1,254 @@
+# ItsUrGuy - The Real Talk App for Men
+
+## Table of Contents
+1. [Overview](#overview)
+2. [Product Spec](#product-spec)
+3. [Wireframes](#wireframes)
+4. [Schema](#schema)
+
+## Overview
+
+### Description
+ItsUrGuy is an anonymous social platform designed specifically for men to share real experiences, honest opinions, and engage in authentic discussions. Inspired by The Tea but tailored for masculine communication styles, the app provides a safe space where men can discuss topics they can't easily share elsewhere - from career struggles and relationship challenges to mental health and personal growth. With the tagline "Where Men Keep It 100," the app combines anonymous posting with robust safety features, crisis intervention, and mental health resources to ensure user well-being while fostering genuine community connection.
+
+### App Evaluation
+
+* **Category:** Social Networking / Community / Mental Health
+* **Mobile:** Mobile-first anonymous posting platform with push notifications for trending topics, real-time commenting, photo/video sharing capabilities, location-based content filtering, and offline reading for saved posts.
+* **Story:** Addresses the critical gap in male-focused social platforms by creating a judgment-free environment for authentic masculine expression. Appeals to men who want honest peer discussion but feel limited by traditional social media expectations or lack safe spaces for vulnerability.
+* **Market:** Large underserved market - men aged 18-35 seeking authentic peer connection. Includes working professionals, students, men in relationships, single men, and those dealing with mental health challenges. Growing awareness of men's emotional needs expands market opportunity.
+* **Habit:** Daily engagement through anonymous posting, trending topic browsing, and real-time discussions. Users check multiple times per day for new content, spend 15-30 minutes per session, and return for ongoing conversation threads. Push notifications for trending topics and replies drive retention.
+* **Scope:** V1 focuses on core anonymous social features with safety integration. V2 adds advanced moderation AI and professional mental health connections. V3 includes location-based features and premium content options. Clear technical scope with proven social platform patterns.
+
+## Product Spec
+
+### 1. User Stories (Required and Optional)
+
+**Required Must-have Stories**
+
+* User can create anonymous account with secure verification system
+* User can create anonymous posts in various topic categories (Work, Relationships, Mental Health, etc.)
+* User can upvote/downvote posts and comments to surface quality content
+* User can comment anonymously on posts and engage in threaded discussions
+* User can browse trending topics and hot discussions in real-time
+* User can report inappropriate content and access moderation tools
+* User can access mental health resources and crisis intervention tools
+* User can search and filter posts by topic categories and keywords
+* User can save posts for later reading and reference
+* User can receive push notifications for trending content and replies
+* User can block other anonymous users and manage their feed preferences
+* User can access community guidelines and safety information
+
+**Optional Nice-to-have Stories**
+
+* User can share photos/videos anonymously with automatic metadata removal
+* User can participate in live chat discussions during major events
+* User can create and participate in anonymous polls and surveys
+* User can access premium features like extended character limits and post scheduling
+* User can connect with verified mental health professionals through the platform
+* User can join private discussion groups organized by specific topics or interests
+* User can receive personalized content recommendations based on engagement history
+* User can access local community discussions with location-based filtering
+* User can participate in community challenges and positive engagement campaigns
+* User can export their anonymous posting history for personal reflection
+* User can access detailed analytics about community engagement and mental health resources used
+* User can enable two-factor authentication for enhanced account security
+
+### 2. Screen Archetypes
+
+* **Splash/Onboarding Screen**
+  * User can learn about anonymous community guidelines and safety features
+  * User can understand the app's purpose and commitment to male mental health
+  
+* **Authentication Screen**
+  * User can create anonymous account with secure verification
+  * User can log in securely without revealing personal information
+
+* **Home Feed Screen**
+  * User can browse trending posts and hot discussions
+  * User can see real-time activity and engagement metrics
+  * User can quickly access different topic categories
+  * User can create new anonymous posts
+
+* **Post Creation Screen**
+  * User can write anonymous posts with category selection
+  * User can add optional photos/videos with automatic privacy protection
+  * User can set content warnings and trigger warnings for sensitive topics
+
+* **Post Detail Screen**
+  * User can read full post content and engage with comments
+  * User can upvote/downvote and share reactions
+  * User can report inappropriate content
+  * User can access mental health resources if crisis language detected
+
+* **Category Browse Screen**
+  * User can explore specific topic categories (Work Life, Relationships, Mental Health, etc.)
+  * User can filter and sort content within categories
+  * User can see category-specific trending topics
+
+* **Search Screen**
+  * User can search posts by keywords and phrases
+  * User can filter search results by category, date, and engagement
+  * User can save search queries for future reference
+
+* **Profile/Settings Screen**
+  * User can manage anonymous profile settings and preferences
+  * User can view posting history and engagement statistics
+  * User can access privacy controls and blocking options
+  * User can customize notification preferences
+
+* **Safety/Resources Screen**
+  * User can access mental health crisis resources and hotlines
+  * User can connect with professional mental health services
+  * User can review community guidelines and reporting procedures
+  * User can access educational content about men's mental health
+
+### 3. Navigation
+
+**Tab Navigation** (Tab to Screen)
+
+* **Home** - Trending Feed & Hot Discussions
+* **Categories** - Topic-Based Content Browse
+* **Create** - Anonymous Post Creation
+* **Search** - Content Discovery & Filtering
+* **Resources** - Safety Tools & Mental Health Support
+
+**Flow Navigation** (Screen to Screen)
+
+* **Splash Screen**
+  * → Onboarding → Authentication → Home Feed
+  
+* **Home Feed Screen**
+  * → Post Detail (post tap)
+  * → Post Creation (create button)
+  * → Category Browse (category tap)
+  * → User Profile (settings icon)
+  * → Safety Resources (crisis detection)
+
+* **Post Creation Screen**
+  * → Home Feed (after posting)
+  * → Safety Resources (crisis language detection)
+  * → Category Selection (category picker)
+
+* **Post Detail Screen**
+  * → Home Feed (back navigation)
+  * → Safety Resources (crisis intervention)
+  * → Report Content (flag button)
+  * → User Blocking (user management)
+
+* **Category Browse Screen**
+  * → Post Detail (post selection)
+  * → Home Feed (back navigation)
+  * → Filtered Search (search within category)
+
+* **Search Screen**
+  * → Post Detail (search result selection)
+  * → Home Feed (back navigation)
+  * → Category Browse (category filter)
+
+* **Safety/Resources Screen**
+  * → External Crisis Hotlines (emergency contact)
+  * → Professional Directory (mental health services)
+  * → Home Feed (back navigation)
+  * → Report Content (community moderation)
+
+## Wireframes
+
+[Add picture of your hand sketched wireframes in this section]
+
+*Note: Wireframes should include:*
+- *Home feed with anonymous posts, upvote buttons, and trending indicators*
+- *Post creation interface with category selection and character count*
+- *Post detail view with threaded anonymous comments*
+- *Category browse screen with topic-based filtering*
+- *Crisis intervention overlay with immediate resource access*
+- *Search interface with keyword filtering and category options*
+
+### [BONUS] Digital Wireframes & Mockups
+
+*Digital wireframes will be created showing:*
+- *Masculine color scheme (dark mode friendly, deep blues, grays)*
+- *Anonymous user identification system (consistent but private avatars)*
+- *Clear content hierarchy with engagement metrics*
+- *Crisis intervention UI that's accessible but not intrusive*
+- *Mobile-first responsive design optimized for thumb navigation*
+
+### [BONUS] Interactive Prototype
+
+*Interactive prototype will demonstrate:*
+- *Anonymous post creation and publishing flow*
+- *Real-time upvoting and trending content updates*
+- *Crisis detection and resource presentation*
+- *Comment threading and anonymous reply system*
+- *Category filtering and content discovery*
+
+## Schema
+
+*[This section will be completed in Unit 9]*
+
+### Models
+
+| Model | Properties | Description |
+|-------|-----------|-------------|
+| User | userId, anonymousHandle, hashedAuth, createdAt, isVerified, karmaScore, postCount, isBanned | Anonymous user account management |
+| Post | postId, userId, content, category, imageUrl, createdAt, upvotes, downvotes, commentCount, isReported, isFlagged | User-generated anonymous posts |
+| Comment | commentId, postId, userId, content, createdAt, upvotes, downvotes, parentCommentId, isReported | Threaded comment system |
+| Vote | voteId, userId, postId, commentId, voteType, createdAt | User voting tracking |
+| Report | reportId, reporterId, postId, commentId, reason, status, reviewedAt, moderatorId | Content moderation system |
+| Category | categoryId, name, description, iconUrl, postCount, isActive | Topic organization |
+| CrisisIntervention | interventionId, userId, postId, triggerType, resourcesProvided, timestamp, followUpRequired | Mental health safety tracking |
+| ModerationAction | actionId, moderatorId, targetId, actionType, reason, timestamp | Moderation audit trail |
+| SavedPost | savedId, userId, postId, savedAt, notes | User content bookmarking |
+
+### Networking
+
+**Home Feed Screen**
+- `(GET)` Fetch trending posts with engagement metrics and real-time updates
+- `(GET)` Load user's personalized feed based on interaction history
+- `(POST)` Submit upvote/downvote on posts from feed
+
+**Post Creation Screen**
+- `(POST)` Create new anonymous post with category and content
+- `(POST)` Upload and process anonymous image/video content
+- `(GET)` Fetch available categories and posting guidelines
+
+**Post Detail Screen**
+- `(GET)` Fetch full post content with threaded comments
+- `(POST)` Submit anonymous comment on post
+- `(POST)` Report post for community guidelines violation
+- `(GET)` Check for crisis intervention triggers and display resources
+
+**Category Browse Screen**
+- `(GET)` Fetch posts filtered by specific category
+- `(GET)` Load category information and posting statistics
+- `(GET)` Retrieve category-specific trending topics
+
+**Search Screen**
+- `(GET)` Search posts by keyword with category and date filters
+- `(GET)` Fetch search suggestions and popular queries
+- `(POST)` Save search queries for future reference
+
+**Safety/Resources Screen**
+- `(GET)` Fetch crisis intervention resources and hotline information
+- `(GET)` Load mental health professional directory
+- `(POST)` Log crisis resource access for follow-up support
+- `(GET)` Retrieve community guidelines and safety information
+
+*Basic code snippets for API network requests will be added during development phase*
+
+*External API Integration:*
+- *Crisis Text Line API for immediate mental health support*
+- *Content moderation API for automated harmful content detection*
+- *Anonymous image processing for metadata removal*
+- *Push notification service for real-time engagement*
+
+---
+
+## Quick Jump
+* [Original App Design Project - README Template](#)
+* [ItsUrGuy](#itsurguy---the-real-talk-app-for-men)
+   * [Table of Contents](#table-of-contents)
+   * [Overview](#overview)
+   * [Product Spec](#product-spec)
+   * [Wireframes](#wireframes)
+   * [Schema](#schema)
