@@ -252,3 +252,8 @@ ItsUrGuy is an anonymous social platform designed specifically for men to share 
    * [Product Spec](#product-spec)
    * [Wireframes](#wireframes)
    * [Schema](#schema)
+ 
+
+
+<img src='' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
