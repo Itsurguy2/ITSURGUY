@@ -20,6 +20,13 @@
 		C5C469E72E43312A0073ADE4 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C469E62E43312A0073ADE4 /* PostDetailViewController.swift */; };
 		C5C469E92E43313E0073ADE4 /*  CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C469E82E43313E0073ADE4 /*  CategoriesViewController.swift */; };
 		C5C469EB2E4331530073ADE4 /*  ResourcesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C469EA2E4331530073ADE4 /*  ResourcesViewController.swift */; };
+		C5C469ED2E442D320073ADE4 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C469EC2E442D320073ADE4 /* Post.swift */; };
+		C5C469EF2E442D7E0073ADE4 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C469EE2E442D7E0073ADE4 /* PostTableViewCell.swift */; };
+		C5C469F12E4431EE0073ADE4 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C469F02E4431EE0073ADE4 /* Comment.swift */; };
+		C5C469F32E4432540073ADE4 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C469F22E4432540073ADE4 /* CommentTableViewCell.swift */; };
+		C5C469F52E45CFDA0073ADE4 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C469F42E45CFDA0073ADE4 /* WelcomeViewController.swift */; };
+		C5C469F72E45D0120073ADE4 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C469F62E45D0120073ADE4 /* AuthenticationViewController.swift */; };
+		C5C469F92E45D03E0073ADE4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C469F82E45D03E0073ADE4 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +45,13 @@
 		C5C469E62E43312A0073ADE4 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		C5C469E82E43313E0073ADE4 /*  CategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " CategoriesViewController.swift"; sourceTree = "<group>"; };
 		C5C469EA2E4331530073ADE4 /*  ResourcesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " ResourcesViewController.swift"; sourceTree = "<group>"; };
+		C5C469EC2E442D320073ADE4 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		C5C469EE2E442D7E0073ADE4 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		C5C469F02E4431EE0073ADE4 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		C5C469F22E4432540073ADE4 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		C5C469F42E45CFDA0073ADE4 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		C5C469F62E45D0120073ADE4 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
+		C5C469F82E45D03E0073ADE4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +98,13 @@
 				C5C469E62E43312A0073ADE4 /* PostDetailViewController.swift */,
 				C5C469E82E43313E0073ADE4 /*  CategoriesViewController.swift */,
 				C5C469EA2E4331530073ADE4 /*  ResourcesViewController.swift */,
+				C5C469EC2E442D320073ADE4 /* Post.swift */,
+				C5C469EE2E442D7E0073ADE4 /* PostTableViewCell.swift */,
+				C5C469F02E4431EE0073ADE4 /* Comment.swift */,
+				C5C469F22E4432540073ADE4 /* CommentTableViewCell.swift */,
+				C5C469F42E45CFDA0073ADE4 /* WelcomeViewController.swift */,
+				C5C469F62E45D0120073ADE4 /* AuthenticationViewController.swift */,
+				C5C469F82E45D03E0073ADE4 /* ProfileViewController.swift */,
 			);
 			path = ITSURGUY;
 			sourceTree = "<group>";
@@ -164,9 +185,16 @@
 				C5C469E52E4331120073ADE4 /*  CreatePostViewController.swift in Sources */,
 				C5C469E72E43312A0073ADE4 /* PostDetailViewController.swift in Sources */,
 				C5C469CF2E43270E0073ADE4 /* ViewController.swift in Sources */,
+				C5C469EF2E442D7E0073ADE4 /* PostTableViewCell.swift in Sources */,
 				C5C469EB2E4331530073ADE4 /*  ResourcesViewController.swift in Sources */,
 				C5C469CB2E43270E0073ADE4 /* AppDelegate.swift in Sources */,
+				C5C469F52E45CFDA0073ADE4 /* WelcomeViewController.swift in Sources */,
+				C5C469F12E4431EE0073ADE4 /* Comment.swift in Sources */,
+				C5C469F32E4432540073ADE4 /* CommentTableViewCell.swift in Sources */,
 				C5C469CD2E43270E0073ADE4 /* SceneDelegate.swift in Sources */,
+				C5C469F72E45D0120073ADE4 /* AuthenticationViewController.swift in Sources */,
+				C5C469ED2E442D320073ADE4 /* Post.swift in Sources */,
+				C5C469F92E45D03E0073ADE4 /* ProfileViewController.swift in Sources */,
 				C5C469E92E43313E0073ADE4 /*  CategoriesViewController.swift in Sources */,
 				C5C469E32E4330FE0073ADE4 /* HomeViewController.swift in Sources */,
 			);

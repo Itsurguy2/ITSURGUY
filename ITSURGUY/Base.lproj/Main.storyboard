@@ -1,24 +1,818 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TabBarController">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Tab Bar Controller-->
+        <scene sceneID="TabBarScene">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tabBarController id="TabBarController" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="TabBar">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="HomeNavController" kind="relationship" relationship="viewControllers" id="HomeTabSegue"/>
+                        <segue destination="CategoriesNavController" kind="relationship" relationship="viewControllers" id="CategoriesTabSegue"/>
+                        <segue destination="CreatePostNavController" kind="relationship" relationship="viewControllers" id="CreateTabSegue"/>
+                        <segue destination="ResourcesNavController" kind="relationship" relationship="viewControllers" id="ResourcesTabSegue"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TabBarFirstResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="0.0" y="0.0"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="HomeNavScene">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HomeNavController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" selectedImage="house.fill" id="HomeTabBarItem"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="HomeNavBar">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="HomeViewController" kind="relationship" relationship="rootViewController" id="HomeRootSegue"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HomeNavFirstResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1000" y="-1385"/>
+        </scene>
+        <!--ItsUrGuy-->
+        <scene sceneID="HomeScene">
+            <objects>
+                <viewController id="HomeViewController" customClass="HomeViewController" customModule="ITSURGUY" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HomeView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="FeedSegmentedControl">
+                                <rect key="frame" x="16" y="156" width="382" height="32"/>
+                                <segments>
+                                    <segment title="Trending"/>
+                                    <segment title="Recent"/>
+                                    <segment title="Following"/>
+                                </segments>
+                                <connections>
+                                    <action selector="feedTypeChanged:" destination="HomeViewController" eventType="valueChanged" id="FeedSegmentAction"/>
+                                </connections>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PostsTableView">
+                                <rect key="frame" x="0.0" y="195" width="414" height="569"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="HomeSafeArea"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="FeedSegmentedControl" firstAttribute="leading" secondItem="HomeSafeArea" secondAttribute="leading" constant="16" id="SegmentLeadingConstraint"/>
+                            <constraint firstItem="FeedSegmentedControl" firstAttribute="top" secondItem="HomeSafeArea" secondAttribute="top" constant="16" id="SegmentTopConstraint"/>
+                            <constraint firstItem="HomeSafeArea" firstAttribute="trailing" secondItem="FeedSegmentedControl" secondAttribute="trailing" constant="16" id="SegmentTrailingConstraint"/>
+                            <constraint firstItem="HomeSafeArea" firstAttribute="bottom" secondItem="PostsTableView" secondAttribute="bottom" constant="49" id="TableBottomConstraint"/>
+                            <constraint firstItem="PostsTableView" firstAttribute="leading" secondItem="HomeSafeArea" secondAttribute="leading" id="TableLeadingConstraint"/>
+                            <constraint firstItem="PostsTableView" firstAttribute="top" secondItem="FeedSegmentedControl" secondAttribute="bottom" constant="8" id="TableTopConstraint"/>
+                            <constraint firstItem="HomeSafeArea" firstAttribute="trailing" secondItem="PostsTableView" secondAttribute="trailing" id="TableTrailingConstraint"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="ItsUrGuy" id="HomeNavItem">
+                        <barButtonItem key="rightBarButtonItem" image="arrow.clockwise" catalog="system" id="RefreshButton">
+                            <connections>
+                                <action selector="refreshButtonTapped:" destination="HomeViewController" id="RefreshButtonAction"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="feedSegmentedControl" destination="FeedSegmentedControl" id="FeedSegmentOutlet"/>
+                        <outlet property="postsTableView" destination="PostsTableView" id="PostsTableOutlet"/>
+                        <outlet property="refreshButton" destination="RefreshButton" id="RefreshButtonOutlet"/>
+                        <segue destination="PostDetailViewController" kind="show" identifier="showPostDetail" id="ShowPostDetailSegue"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HomeFirstResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2000.0000000000002" y="-1385.4910714285713"/>
+        </scene>
+        <!--Topics-->
+        <scene sceneID="CategoriesNavScene">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CategoriesNavController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Topics" image="folder" catalog="system" selectedImage="folder.fill" id="CategoriesTabBarItem"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="CategoriesNavBar">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CategoriesViewController" kind="relationship" relationship="rootViewController" id="CategoriesRootSegue"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CategoriesNavFirstResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1000" y="-668"/>
+        </scene>
+        <!--Discussion Topics-->
+        <scene sceneID="CategoriesScene">
+            <objects>
+                <viewController id="CategoriesViewController" customClass="CategoriesViewController" customModule="ITSURGUY" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CategoriesView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="SearchBar">
+                                <rect key="frame" x="0.0" y="140" width="414" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" estimatedRowHeight="100" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="CategoriesTableView">
+                                <rect key="frame" x="0.0" y="191" width="414" height="573"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="CategoriesSafeArea"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="CategoriesSafeArea" firstAttribute="bottom" secondItem="CategoriesTableView" secondAttribute="bottom" constant="49" id="CategoriesTableBottomConstraint"/>
+                            <constraint firstItem="CategoriesTableView" firstAttribute="leading" secondItem="CategoriesSafeArea" secondAttribute="leading" id="CategoriesTableLeadingConstraint"/>
+                            <constraint firstItem="CategoriesTableView" firstAttribute="top" secondItem="SearchBar" secondAttribute="bottom" id="CategoriesTableTopConstraint"/>
+                            <constraint firstItem="CategoriesSafeArea" firstAttribute="trailing" secondItem="CategoriesTableView" secondAttribute="trailing" id="CategoriesTableTrailingConstraint"/>
+                            <constraint firstItem="SearchBar" firstAttribute="leading" secondItem="CategoriesSafeArea" secondAttribute="leading" id="SearchBarLeadingConstraint"/>
+                            <constraint firstItem="SearchBar" firstAttribute="top" secondItem="CategoriesSafeArea" secondAttribute="top" id="SearchBarTopConstraint"/>
+                            <constraint firstItem="CategoriesSafeArea" firstAttribute="trailing" secondItem="SearchBar" secondAttribute="trailing" id="SearchBarTrailingConstraint"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Discussion Topics" id="CategoriesNavItem">
+                        <barButtonItem key="rightBarButtonItem" image="line.3.horizontal.decrease.circle" catalog="system" id="FilterButton">
+                            <connections>
+                                <action selector="filterButtonTapped:" destination="CategoriesViewController" id="FilterButtonAction"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="categoriesTableView" destination="CategoriesTableView" id="CategoriesTableOutlet"/>
+                        <outlet property="filterButton" destination="FilterButton" id="FilterButtonOutlet"/>
+                        <outlet property="searchBar" destination="SearchBar" id="SearchBarOutlet"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CategoriesFirstResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2000" y="-668"/>
+        </scene>
+        <!--Create-->
+        <scene sceneID="CreatePostNavScene">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CreatePostNavController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Create" image="plus.circle" catalog="system" selectedImage="plus.circle.fill" id="CreatePostTabBarItem"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CreatePostNavBar">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CreatePostViewController" kind="relationship" relationship="rootViewController" id="CreatePostRootSegue"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CreatePostNavFirstResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1000" y="100"/>
+        </scene>
+        <!--New Post-->
+        <scene sceneID="CreatePostScene">
+            <objects>
+                <viewController id="CreatePostViewController" customClass="CreatePostViewController" customModule="ITSURGUY" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CreatePostView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CategorySegmentedControl">
+                                <rect key="frame" x="16" y="104" width="382" height="32"/>
+                                <segments>
+                                    <segment title="⚡ Real Talk"/>
+                                    <segment title="💼 Work"/>
+                                    <segment title="🧠 Mental Health"/>
+                                    <segment title="❤️ Relationships"/>
+                                </segments>
+                                <connections>
+                                    <action selector="categoryChanged:" destination="CreatePostViewController" eventType="valueChanged" id="CategorySegmentAction"/>
+                                </connections>
+                            </segmentedControl>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="What's on your mind? Keep it real..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="PostContentTextView">
+                                <rect key="frame" x="16" y="151" width="382" height="200"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="TextViewHeightConstraint"/>
+                                </constraints>
+                                <color key="textColor" systemColor="placeholderTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/500" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CharacterCountLabel">
+                                <rect key="frame" x="359" y="359" width="39" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AddPhotoButton">
+                                <rect key="frame" x="16" y="392" width="382" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="AddPhotoButtonHeightConstraint"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="📸 Add Anonymous Photo">
+                                    <color key="baseForegroundColor" systemColor="systemBlueColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="addPhotoButtonTapped:" destination="CreatePostViewController" eventType="touchUpInside" id="AddPhotoButtonAction"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TriggerWarningView">
+                                <rect key="frame" x="16" y="452" width="382" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content Warning" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TriggerWarningLabel">
+                                        <rect key="frame" x="16" y="13.5" width="109" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TriggerWarningSwitch">
+                                        <rect key="frame" x="333" y="6.5" width="51" height="31"/>
+                                    </switch>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="TriggerWarningLabel" firstAttribute="centerY" secondItem="TriggerWarningView" secondAttribute="centerY" id="TriggerLabelCenterYConstraint"/>
+                                    <constraint firstItem="TriggerWarningLabel" firstAttribute="leading" secondItem="TriggerWarningView" secondAttribute="leading" constant="16" id="TriggerLabelLeadingConstraint"/>
+                                    <constraint firstItem="TriggerWarningSwitch" firstAttribute="centerY" secondItem="TriggerWarningView" secondAttribute="centerY" id="TriggerSwitchCenterYConstraint"/>
+                                    <constraint firstAttribute="trailing" secondItem="TriggerWarningSwitch" secondAttribute="trailing" id="TriggerSwitchTrailingConstraint"/>
+                                    <constraint firstAttribute="height" constant="44" id="TriggerWarningViewHeightConstraint"/>
+                                </constraints>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CrisisDetectionView">
+                                <rect key="frame" x="16" y="512" width="382" height="80"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⚠️ Crisis Detection Active: If you're in crisis, tap here for immediate help" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CrisisWarningLabel">
+                                        <rect key="frame" x="8" y="8" width="366" height="33.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" systemColor="systemOrangeColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CrisisHelpButton">
+                                        <rect key="frame" x="8" y="49.5" width="366" height="22.5"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Get Immediate Help">
+                                            <color key="baseBackgroundColor" systemColor="systemRedColor"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="crisisHelpButtonTapped:" destination="CreatePostViewController" eventType="touchUpInside" id="CrisisHelpButtonAction"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="CrisisDetectionViewHeightConstraint"/>
+                                    <constraint firstAttribute="bottom" secondItem="CrisisHelpButton" secondAttribute="bottom" constant="8" id="CrisisHelpButtonBottomConstraint"/>
+                                    <constraint firstItem="CrisisHelpButton" firstAttribute="leading" secondItem="CrisisDetectionView" secondAttribute="leading" constant="8" id="CrisisHelpButtonLeadingConstraint"/>
+                                    <constraint firstItem="CrisisHelpButton" firstAttribute="top" secondItem="CrisisWarningLabel" secondAttribute="bottom" constant="8" id="CrisisHelpButtonTopConstraint"/>
+                                    <constraint firstAttribute="trailing" secondItem="CrisisHelpButton" secondAttribute="trailing" constant="8" id="CrisisHelpButtonTrailingConstraint"/>
+                                    <constraint firstItem="CrisisWarningLabel" firstAttribute="leading" secondItem="CrisisDetectionView" secondAttribute="leading" constant="8" id="CrisisWarningLabelLeadingConstraint"/>
+                                    <constraint firstItem="CrisisWarningLabel" firstAttribute="top" secondItem="CrisisDetectionView" secondAttribute="top" constant="8" id="CrisisWarningLabelTopConstraint"/>
+                                    <constraint firstAttribute="trailing" secondItem="CrisisWarningLabel" secondAttribute="trailing" constant="8" id="CrisisWarningLabelTrailingConstraint"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="CreatePostSafeArea"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="AddPhotoButton" firstAttribute="leading" secondItem="CreatePostSafeArea" secondAttribute="leading" constant="16" id="AddPhotoLeadingConstraint"/>
+                            <constraint firstItem="AddPhotoButton" firstAttribute="top" secondItem="CharacterCountLabel" secondAttribute="bottom" constant="16" id="AddPhotoTopConstraint"/>
+                            <constraint firstItem="CreatePostSafeArea" firstAttribute="trailing" secondItem="AddPhotoButton" secondAttribute="trailing" constant="16" id="AddPhotoTrailingConstraint"/>
+                            <constraint firstItem="CategorySegmentedControl" firstAttribute="leading" secondItem="CreatePostSafeArea" secondAttribute="leading" constant="16" id="CategorySegmentLeadingConstraint"/>
+                            <constraint firstItem="CategorySegmentedControl" firstAttribute="top" secondItem="CreatePostSafeArea" secondAttribute="top" constant="16" id="CategorySegmentTopConstraint"/>
+                            <constraint firstItem="CreatePostSafeArea" firstAttribute="trailing" secondItem="CategorySegmentedControl" secondAttribute="trailing" constant="16" id="CategorySegmentTrailingConstraint"/>
+                            <constraint firstItem="CharacterCountLabel" firstAttribute="top" secondItem="PostContentTextView" secondAttribute="bottom" constant="8" id="CharCountTopConstraint"/>
+                            <constraint firstItem="CreatePostSafeArea" firstAttribute="trailing" secondItem="CharacterCountLabel" secondAttribute="trailing" constant="16" id="CharCountTrailingConstraint"/>
+                            <constraint firstItem="CrisisDetectionView" firstAttribute="leading" secondItem="CreatePostSafeArea" secondAttribute="leading" constant="16" id="CrisisDetectionLeadingConstraint"/>
+                            <constraint firstItem="CrisisDetectionView" firstAttribute="top" secondItem="TriggerWarningView" secondAttribute="bottom" constant="16" id="CrisisDetectionTopConstraint"/>
+                            <constraint firstItem="CreatePostSafeArea" firstAttribute="trailing" secondItem="CrisisDetectionView" secondAttribute="trailing" constant="16" id="CrisisDetectionTrailingConstraint"/>
+                            <constraint firstItem="PostContentTextView" firstAttribute="leading" secondItem="CreatePostSafeArea" secondAttribute="leading" constant="16" id="TextViewLeadingConstraint"/>
+                            <constraint firstItem="PostContentTextView" firstAttribute="top" secondItem="CategorySegmentedControl" secondAttribute="bottom" constant="16" id="TextViewTopConstraint"/>
+                            <constraint firstItem="CreatePostSafeArea" firstAttribute="trailing" secondItem="PostContentTextView" secondAttribute="trailing" constant="16" id="TextViewTrailingConstraint"/>
+                            <constraint firstItem="TriggerWarningView" firstAttribute="leading" secondItem="CreatePostSafeArea" secondAttribute="leading" constant="16" id="TriggerWarningLeadingConstraint"/>
+                            <constraint firstItem="TriggerWarningView" firstAttribute="top" secondItem="AddPhotoButton" secondAttribute="bottom" constant="16" id="TriggerWarningTopConstraint"/>
+                            <constraint firstItem="CreatePostSafeArea" firstAttribute="trailing" secondItem="TriggerWarningView" secondAttribute="trailing" constant="16" id="TriggerWarningTrailingConstraint"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Post" id="CreatePostNavItem">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="CancelButton">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="CreatePostViewController" id="CancelButtonAction"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="compose" id="PostButton">
+                            <connections>
+                                <action selector="postButtonTapped:" destination="CreatePostViewController" id="PostButtonAction"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addPhotoButton" destination="AddPhotoButton" id="AddPhotoButtonOutlet"/>
+                        <outlet property="cancelButton" destination="CancelButton" id="CancelButtonOutlet"/>
+                        <outlet property="categorySegmentedControl" destination="CategorySegmentedControl" id="CategorySegmentOutlet"/>
+                        <outlet property="characterCountLabel" destination="CharacterCountLabel" id="CharacterCountOutlet"/>
+                        <outlet property="crisisDetectionView" destination="CrisisDetectionView" id="CrisisDetectionOutlet"/>
+                        <outlet property="crisisHelpButton" destination="CrisisHelpButton" id="CrisisHelpButtonOutlet"/>
+                        <outlet property="postButton" destination="PostButton" id="PostButtonOutlet"/>
+                        <outlet property="postContentTextView" destination="PostContentTextView" id="PostContentTextViewOutlet"/>
+                        <outlet property="triggerWarningLabel" destination="TriggerWarningLabel" id="TriggerWarningLabelOutlet"/>
+                        <outlet property="triggerWarningSwitch" destination="TriggerWarningSwitch" id="TriggerWarningSwitchOutlet"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CreatePostFirstResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2000" y="100"/>
+        </scene>
+        <!--Help-->
+        <scene sceneID="ResourcesNavScene">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ResourcesNavController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Help" image="questionmark.circle" catalog="system" selectedImage="questionmark.circle.fill" id="ResourcesTabBarItem"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="ResourcesNavBar">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ResourcesViewController" kind="relationship" relationship="rootViewController" id="ResourcesRootSegue"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ResourcesNavFirstResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1000" y="911"/>
+        </scene>
+        <!--Help & Safety-->
+        <scene sceneID="ResourcesScene">
+            <objects>
+                <viewController id="ResourcesViewController" customClass="ResourcesViewController" customModule="ITSURGUY" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ResourcesView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ScrollView">
+                                <rect key="frame" x="0.0" y="140" width="414" height="673"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="800"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CrisisContainerView">
+                                                <rect key="frame" x="16" y="16" width="382" height="140"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🆘 Crisis Resources" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CrisisHeaderLabel">
+                                                        <rect key="frame" x="8" y="8" width="366" height="24"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <color key="textColor" systemColor="systemRedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CrisisCallButton">
+                                                        <rect key="frame" x="8" y="48" width="366" height="40"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="CrisisCallHeightConstraint"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="filled" title="🆘 Call Crisis Hotline: 988">
+                                                            <backgroundConfiguration key="background">
+                                                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                            </backgroundConfiguration>
+                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="18"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="callCrisisHotline" destination="ResourcesViewController" eventType="touchUpInside" id="CrisisCallAction"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CrisisTextButton">
+                                                        <rect key="frame" x="8" y="96" width="366" height="36"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="filled" title="💬 Text Crisis Line: 741741">
+                                                            <backgroundConfiguration key="background">
+                                                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                                            </backgroundConfiguration>
+                                                            <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="textCrisisLine" destination="ResourcesViewController" eventType="touchUpInside" id="CrisisTextAction"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="CrisisCallButton" firstAttribute="leading" secondItem="CrisisContainerView" secondAttribute="leading" constant="8" id="CrisisCallLeadingConstraint"/>
+                                                    <constraint firstItem="CrisisCallButton" firstAttribute="top" secondItem="CrisisHeaderLabel" secondAttribute="bottom" constant="16" id="CrisisCallTopConstraint"/>
+                                                    <constraint firstAttribute="trailing" secondItem="CrisisCallButton" secondAttribute="trailing" constant="8" id="CrisisCallTrailingConstraint"/>
+                                                    <constraint firstAttribute="height" constant="140" id="CrisisContainerHeightConstraint"/>
+                                                    <constraint firstItem="CrisisHeaderLabel" firstAttribute="leading" secondItem="CrisisContainerView" secondAttribute="leading" constant="8" id="CrisisHeaderLeadingConstraint"/>
+                                                    <constraint firstItem="CrisisHeaderLabel" firstAttribute="top" secondItem="CrisisContainerView" secondAttribute="top" constant="8" id="CrisisHeaderTopConstraint"/>
+                                                    <constraint firstAttribute="trailing" secondItem="CrisisHeaderLabel" secondAttribute="trailing" constant="8" id="CrisisHeaderTrailingConstraint"/>
+                                                    <constraint firstAttribute="bottom" secondItem="CrisisTextButton" secondAttribute="bottom" constant="8" id="CrisisTextBottomConstraint"/>
+                                                    <constraint firstItem="CrisisTextButton" firstAttribute="leading" secondItem="CrisisContainerView" secondAttribute="leading" constant="8" id="CrisisTextLeadingConstraint"/>
+                                                    <constraint firstItem="CrisisTextButton" firstAttribute="top" secondItem="CrisisCallButton" secondAttribute="bottom" constant="8" id="CrisisTextTopConstraint"/>
+                                                    <constraint firstAttribute="trailing" secondItem="CrisisTextButton" secondAttribute="trailing" constant="8" id="CrisisTextTrailingConstraint"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EmergencyContactsButton">
+                                                <rect key="frame" x="16" y="172" width="382" height="36"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="📞 More Emergency Resources">
+                                                    <color key="baseForegroundColor" systemColor="systemBlueColor"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="showEmergencyContacts" destination="ResourcesViewController" eventType="touchUpInside" id="EmergencyContactsAction"/>
+                                                </connections>
+                                            </button>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ResourcesTableView">
+                                                <rect key="frame" x="0.0" y="224" width="414" height="560"/>
+                                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="560" id="ResourcesTableHeightConstraint"/>
+                                                </constraints>
+                                            </tableView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="800" id="ContentViewHeightConstraint"/>
+                                            <constraint firstAttribute="width" secondItem="ScrollView" secondAttribute="width" id="ContentViewWidthConstraint"/>
+                                            <constraint firstItem="CrisisContainerView" firstAttribute="leading" secondItem="ContentView" secondAttribute="leading" constant="16" id="CrisisContainerLeadingConstraint"/>
+                                            <constraint firstItem="CrisisContainerView" firstAttribute="top" secondItem="ContentView" secondAttribute="top" constant="16" id="CrisisContainerTopConstraint"/>
+                                            <constraint firstAttribute="trailing" secondItem="CrisisContainerView" secondAttribute="trailing" constant="16" id="CrisisContainerTrailingConstraint"/>
+                                            <constraint firstItem="EmergencyContactsButton" firstAttribute="leading" secondItem="ContentView" secondAttribute="leading" constant="16" id="EmergencyContactsLeadingConstraint"/>
+                                            <constraint firstItem="EmergencyContactsButton" firstAttribute="top" secondItem="CrisisContainerView" secondAttribute="bottom" constant="16" id="EmergencyContactsTopConstraint"/>
+                                            <constraint firstAttribute="trailing" secondItem="EmergencyContactsButton" secondAttribute="trailing" constant="16" id="EmergencyContactsTrailingConstraint"/>
+                                            <constraint firstAttribute="bottom" secondItem="ResourcesTableView" secondAttribute="bottom" constant="16" id="ResourcesTableBottomConstraint"/>
+                                            <constraint firstItem="ResourcesTableView" firstAttribute="leading" secondItem="ContentView" secondAttribute="leading" id="ResourcesTableLeadingConstraint"/>
+                                            <constraint firstItem="ResourcesTableView" firstAttribute="top" secondItem="EmergencyContactsButton" secondAttribute="bottom" constant="16" id="ResourcesTableTopConstraint"/>
+                                            <constraint firstAttribute="trailing" secondItem="ResourcesTableView" secondAttribute="trailing" id="ResourcesTableTrailingConstraint"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="ContentView" secondAttribute="bottom" id="ContentViewBottomConstraint"/>
+                                    <constraint firstItem="ContentView" firstAttribute="leading" secondItem="ScrollView" secondAttribute="leading" id="ContentViewLeadingConstraint"/>
+                                    <constraint firstItem="ContentView" firstAttribute="top" secondItem="ScrollView" secondAttribute="top" id="ContentViewTopConstraint"/>
+                                    <constraint firstAttribute="trailing" secondItem="ContentView" secondAttribute="trailing" id="ContentViewTrailingConstraint"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ResourcesSafeArea"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ResourcesSafeArea" firstAttribute="bottom" secondItem="ScrollView" secondAttribute="bottom" constant="49" id="ScrollViewBottomConstraint"/>
+                            <constraint firstItem="ScrollView" firstAttribute="leading" secondItem="ResourcesSafeArea" secondAttribute="leading" id="ScrollViewLeadingConstraint"/>
+                            <constraint firstItem="ScrollView" firstAttribute="top" secondItem="ResourcesSafeArea" secondAttribute="top" id="ScrollViewTopConstraint"/>
+                            <constraint firstItem="ResourcesSafeArea" firstAttribute="trailing" secondItem="ScrollView" secondAttribute="trailing" id="ScrollViewTrailingConstraint"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Help &amp; Safety" id="ResourcesNavItem">
+                        <barButtonItem key="rightBarButtonItem" image="gear" catalog="system" id="SettingsButton">
+                            <connections>
+                                <action selector="settingsButtonTapped" destination="ResourcesViewController" id="SettingsButtonAction"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="contentView" destination="ContentView" id="ContentViewOutlet"/>
+                        <outlet property="crisisCallButton" destination="CrisisCallButton" id="CrisisCallButtonOutlet"/>
+                        <outlet property="crisisContainerView" destination="CrisisContainerView" id="CrisisContainerViewOutlet"/>
+                        <outlet property="crisisTextButton" destination="CrisisTextButton" id="CrisisTextButtonOutlet"/>
+                        <outlet property="emergencyContactsButton" destination="EmergencyContactsButton" id="EmergencyContactsButtonOutlet"/>
+                        <outlet property="resourcesTableView" destination="ResourcesTableView" id="ResourcesTableViewOutlet"/>
+                        <outlet property="resourcesTableViewHeightConstraint" destination="ResourcesTableHeightConstraint" id="ResourcesTableViewHeightConstraintOutlet"/>
+                        <outlet property="scrollView" destination="ScrollView" id="ScrollViewOutlet"/>
+                        <outlet property="settingsButton" destination="SettingsButton" id="SettingsButtonOutlet"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ResourcesFirstResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2000" y="911"/>
+        </scene>
+        <!--Post Details-->
+        <scene sceneID="PostDetailScene">
+            <objects>
+                <viewController id="PostDetailViewController" customClass="PostDetailViewController" customModule="ITSURGUY" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PostDetailView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PostDetailScrollView">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PostDetailContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="800"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PostContainerView">
+                                                <rect key="frame" x="16" y="16" width="382" height="200"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AvatarView">
+                                                        <rect key="frame" x="12" y="12" width="40" height="40"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AvatarLabel">
+                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="AvatarHeightConstraint"/>
+                                                            <constraint firstAttribute="bottom" secondItem="AvatarLabel" secondAttribute="bottom" id="AvatarLabelBottomConstraint"/>
+                                                            <constraint firstItem="AvatarLabel" firstAttribute="leading" secondItem="AvatarView" secondAttribute="leading" id="AvatarLabelLeadingConstraint"/>
+                                                            <constraint firstItem="AvatarLabel" firstAttribute="top" secondItem="AvatarView" secondAttribute="top" id="AvatarLabelTopConstraint"/>
+                                                            <constraint firstAttribute="trailing" secondItem="AvatarLabel" secondAttribute="trailing" id="AvatarLabelTrailingConstraint"/>
+                                                            <constraint firstAttribute="width" constant="40" id="AvatarWidthConstraint"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anonymous Guy #1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HandleLabel">
+                                                        <rect key="frame" x="64" y="12" width="134" height="18"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="💼 Work Life • 2h ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TimeLabel">
+                                                        <rect key="frame" x="64" y="34" width="120" height="14"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="💼" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CategoryBadge">
+                                                        <rect key="frame" x="342" y="18" width="28" height="20"/>
+                                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="20" id="CategoryBadgeHeightConstraint"/>
+                                                            <constraint firstAttribute="width" constant="28" id="CategoryBadgeWidthConstraint"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just got promoted to senior developer but honestly feeling major imposter syndrome..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PostContentLabel">
+                                                        <rect key="frame" x="12" y="64" width="358" height="80"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    </label>
+                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TriggerWarningViewDetail">
+                                                        <rect key="frame" x="12" y="152" width="120" height="24"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⚠️ Content Warning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TriggerWarningDetailLabel">
+                                                                <rect key="frame" x="0.0" y="0.0" width="120" height="24"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
+                                                                <color key="textColor" systemColor="systemOrangeColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="24" id="TriggerWarningDetailHeightConstraint"/>
+                                                            <constraint firstAttribute="bottom" secondItem="TriggerWarningDetailLabel" secondAttribute="bottom" id="TriggerWarningDetailLabelBottomConstraint"/>
+                                                            <constraint firstItem="TriggerWarningDetailLabel" firstAttribute="leading" secondItem="TriggerWarningViewDetail" secondAttribute="leading" id="TriggerWarningDetailLabelLeadingConstraint"/>
+                                                            <constraint firstItem="TriggerWarningDetailLabel" firstAttribute="top" secondItem="TriggerWarningViewDetail" secondAttribute="top" id="TriggerWarningDetailLabelTopConstraint"/>
+                                                            <constraint firstAttribute="trailing" secondItem="TriggerWarningDetailLabel" secondAttribute="trailing" id="TriggerWarningDetailLabelTrailingConstraint"/>
+                                                            <constraint firstAttribute="width" constant="120" id="TriggerWarningDetailWidthConstraint"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ActionButtonsStackView">
+                                                        <rect key="frame" x="12" y="152" width="280" height="36"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UpvoteButton">
+                                                                <rect key="frame" x="0.0" y="0.0" width="60" height="36"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="60" id="UpvoteButtonWidthConstraint"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="↑ 47">
+                                                                    <color key="baseForegroundColor" systemColor="systemGrayColor"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="upvoteButtonTapped:" destination="PostDetailViewController" eventType="touchUpInside" id="UpvoteButtonAction"/>
+                                                                </connections>
+                                                            </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="47" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UpvoteCountLabel">
+                                                                <rect key="frame" x="76" y="0.0" width="16" height="36"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DownvoteButton">
+                                                                <rect key="frame" x="108" y="0.0" width="60" height="36"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="60" id="DownvoteButtonWidthConstraint"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" title="↓ 2">
+                                                                    <color key="baseForegroundColor" systemColor="systemGrayColor"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="downvoteButtonTapped:" destination="PostDetailViewController" eventType="touchUpInside" id="DownvoteButtonAction"/>
+                                                                </connections>
+                                                            </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DownvoteCountLabel">
+                                                                <rect key="frame" x="184" y="0.0" width="8" height="36"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ShareButton">
+                                                                <rect key="frame" x="208" y="0.0" width="50" height="36"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="50" id="ShareButtonWidthConstraint"/>
+                                                                </constraints>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.up" catalog="system">
+                                                                    <color key="baseForegroundColor" systemColor="systemGrayColor"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="shareButtonTapped:" destination="PostDetailViewController" eventType="touchUpInside" id="ShareButtonAction"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ReportButton">
+                                                                <rect key="frame" x="274" y="0.0" width="6" height="36"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain" image="flag" catalog="system">
+                                                                    <color key="baseForegroundColor" systemColor="systemGrayColor"/>
+                                                                </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="reportButtonTapped:" destination="PostDetailViewController" eventType="touchUpInside" id="ReportButtonAction"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="36" id="ActionButtonsStackViewHeightConstraint"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="ActionButtonsStackView" secondAttribute="bottom" constant="12" id="ActionButtonsStackViewBottomConstraint"/>
+                                                    <constraint firstItem="ActionButtonsStackView" firstAttribute="leading" secondItem="PostContainerView" secondAttribute="leading" constant="12" id="ActionButtonsStackViewLeadingConstraint"/>
+                                                    <constraint firstItem="ActionButtonsStackView" firstAttribute="top" secondItem="PostContentLabel" secondAttribute="bottom" constant="8" id="ActionButtonsStackViewTopConstraint"/>
+                                                    <constraint firstItem="AvatarView" firstAttribute="leading" secondItem="PostContainerView" secondAttribute="leading" constant="12" id="AvatarViewLeadingConstraint"/>
+                                                    <constraint firstItem="AvatarView" firstAttribute="top" secondItem="PostContainerView" secondAttribute="top" constant="12" id="AvatarViewTopConstraint"/>
+                                                    <constraint firstItem="CategoryBadge" firstAttribute="centerY" secondItem="HandleLabel" secondAttribute="centerY" id="CategoryBadgeCenterYConstraint"/>
+                                                    <constraint firstAttribute="trailing" secondItem="CategoryBadge" secondAttribute="trailing" constant="12" id="CategoryBadgeTrailingConstraint"/>
+                                                    <constraint firstItem="HandleLabel" firstAttribute="leading" secondItem="AvatarView" secondAttribute="trailing" constant="12" id="HandleLabelLeadingConstraint"/>
+                                                    <constraint firstItem="HandleLabel" firstAttribute="top" secondItem="PostContainerView" secondAttribute="top" constant="12" id="HandleLabelTopConstraint"/>
+                                                    <constraint firstAttribute="height" constant="200" id="PostContainerViewHeightConstraint"/>
+                                                    <constraint firstItem="PostContentLabel" firstAttribute="leading" secondItem="PostContainerView" secondAttribute="leading" constant="12" id="PostContentLabelLeadingConstraint"/>
+                                                    <constraint firstItem="PostContentLabel" firstAttribute="top" secondItem="AvatarView" secondAttribute="bottom" constant="12" id="PostContentLabelTopConstraint"/>
+                                                    <constraint firstAttribute="trailing" secondItem="PostContentLabel" secondAttribute="trailing" constant="12" id="PostContentLabelTrailingConstraint"/>
+                                                    <constraint firstItem="TimeLabel" firstAttribute="leading" secondItem="HandleLabel" secondAttribute="leading" id="TimeLabelLeadingConstraint"/>
+                                                    <constraint firstItem="TimeLabel" firstAttribute="top" secondItem="HandleLabel" secondAttribute="bottom" constant="4" id="TimeLabelTopConstraint"/>
+                                                    <constraint firstItem="TriggerWarningViewDetail" firstAttribute="leading" secondItem="PostContainerView" secondAttribute="leading" constant="12" id="TriggerWarningViewDetailLeadingConstraint"/>
+                                                    <constraint firstItem="TriggerWarningViewDetail" firstAttribute="top" secondItem="PostContentLabel" secondAttribute="bottom" constant="8" id="TriggerWarningViewDetailTopConstraint"/>
+                                                </constraints>
+                                            </view>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Share your thoughts anonymously..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CommentTextView">
+                                                <rect key="frame" x="16" y="232" width="302" height="80"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="80" id="CommentTextViewHeightConstraint"/>
+                                                </constraints>
+                                                <color key="textColor" systemColor="placeholderTextColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PostCommentButton">
+                                                <rect key="frame" x="326" y="232" width="72" height="80"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="72" id="PostCommentButtonWidthConstraint"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Post">
+                                                    <backgroundConfiguration key="background">
+                                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                                    </backgroundConfiguration>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="postCommentButtonTapped:" destination="PostDetailViewController" eventType="touchUpInside" id="PostCommentButtonAction"/>
+                                                </connections>
+                                            </button>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="CommentsTableView">
+                                                <rect key="frame" x="0.0" y="328" width="414" height="456"/>
+                                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="456" id="CommentsTableViewHeightConstraint"/>
+                                                </constraints>
+                                            </tableView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="CommentTextView" firstAttribute="leading" secondItem="PostDetailContentView" secondAttribute="leading" constant="16" id="CommentTextViewLeadingConstraint"/>
+                                            <constraint firstItem="CommentTextView" firstAttribute="top" secondItem="PostContainerView" secondAttribute="bottom" constant="16" id="CommentTextViewTopConstraint"/>
+                                            <constraint firstAttribute="bottom" secondItem="CommentsTableView" secondAttribute="bottom" constant="16" id="CommentsTableViewBottomConstraint"/>
+                                            <constraint firstItem="CommentsTableView" firstAttribute="leading" secondItem="PostDetailContentView" secondAttribute="leading" id="CommentsTableViewLeadingConstraint"/>
+                                            <constraint firstItem="CommentsTableView" firstAttribute="top" secondItem="CommentTextView" secondAttribute="bottom" constant="16" id="CommentsTableViewTopConstraint"/>
+                                            <constraint firstAttribute="trailing" secondItem="CommentsTableView" secondAttribute="trailing" id="CommentsTableViewTrailingConstraint"/>
+                                            <constraint firstItem="PostCommentButton" firstAttribute="height" secondItem="CommentTextView" secondAttribute="height" id="PostCommentButtonHeightConstraint"/>
+                                            <constraint firstItem="PostCommentButton" firstAttribute="leading" secondItem="CommentTextView" secondAttribute="trailing" constant="8" id="PostCommentButtonLeadingConstraint"/>
+                                            <constraint firstItem="PostCommentButton" firstAttribute="top" secondItem="PostContainerView" secondAttribute="bottom" constant="16" id="PostCommentButtonTopConstraint"/>
+                                            <constraint firstAttribute="trailing" secondItem="PostCommentButton" secondAttribute="trailing" constant="16" id="PostCommentButtonTrailingConstraint"/>
+                                            <constraint firstItem="PostContainerView" firstAttribute="leading" secondItem="PostDetailContentView" secondAttribute="leading" constant="16" id="PostContainerViewLeadingConstraint"/>
+                                            <constraint firstItem="PostContainerView" firstAttribute="top" secondItem="PostDetailContentView" secondAttribute="top" constant="16" id="PostContainerViewTopConstraint"/>
+                                            <constraint firstAttribute="trailing" secondItem="PostContainerView" secondAttribute="trailing" constant="16" id="PostContainerViewTrailingConstraint"/>
+                                            <constraint firstAttribute="height" constant="800" id="PostDetailContentViewHeightConstraint"/>
+                                            <constraint firstAttribute="width" secondItem="PostDetailScrollView" secondAttribute="width" id="PostDetailContentViewWidthConstraint"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="PostDetailContentView" secondAttribute="bottom" id="PostDetailContentViewBottomConstraint"/>
+                                    <constraint firstItem="PostDetailContentView" firstAttribute="leading" secondItem="PostDetailScrollView" secondAttribute="leading" id="PostDetailContentViewLeadingConstraint"/>
+                                    <constraint firstItem="PostDetailContentView" firstAttribute="top" secondItem="PostDetailScrollView" secondAttribute="top" id="PostDetailContentViewTopConstraint"/>
+                                    <constraint firstAttribute="trailing" secondItem="PostDetailContentView" secondAttribute="trailing" id="PostDetailContentViewTrailingConstraint"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="PostDetailSafeArea"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="PostDetailSafeArea" firstAttribute="bottom" secondItem="PostDetailScrollView" secondAttribute="bottom" constant="49" id="PostDetailScrollViewBottomConstraint"/>
+                            <constraint firstItem="PostDetailScrollView" firstAttribute="leading" secondItem="PostDetailSafeArea" secondAttribute="leading" id="PostDetailScrollViewLeadingConstraint"/>
+                            <constraint firstItem="PostDetailScrollView" firstAttribute="top" secondItem="PostDetailSafeArea" secondAttribute="top" id="PostDetailScrollViewTopConstraint"/>
+                            <constraint firstItem="PostDetailSafeArea" firstAttribute="trailing" secondItem="PostDetailScrollView" secondAttribute="trailing" id="PostDetailScrollViewTrailingConstraint"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Post Details" id="PostDetailNavItem">
+                        <barButtonItem key="rightBarButtonItem" image="ellipsis" catalog="system" id="MoreOptionsButton">
+                            <connections>
+                                <action selector="moreOptionsButtonTapped" destination="PostDetailViewController" id="MoreOptionsButtonAction"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="avatarLabel" destination="AvatarLabel" id="AvatarLabelOutlet"/>
+                        <outlet property="avatarView" destination="AvatarView" id="AvatarViewOutlet"/>
+                        <outlet property="categoryBadge" destination="CategoryBadge" id="CategoryBadgeOutlet"/>
+                        <outlet property="commentTextView" destination="CommentTextView" id="CommentTextViewOutlet"/>
+                        <outlet property="commentsTableView" destination="CommentsTableView" id="CommentsTableViewOutlet"/>
+                        <outlet property="commentsTableViewHeightConstraint" destination="CommentsTableViewHeightConstraint" id="CommentsTableViewHeightConstraintOutlet"/>
+                        <outlet property="contentView" destination="PostDetailContentView" id="PostDetailContentViewOutlet"/>
+                        <outlet property="downvoteButton" destination="DownvoteButton" id="DownvoteButtonOutlet"/>
+                        <outlet property="downvoteCountLabel" destination="DownvoteCountLabel" id="DownvoteCountLabelOutlet"/>
+                        <outlet property="handleLabel" destination="HandleLabel" id="HandleLabelOutlet"/>
+                        <outlet property="postCommentButton" destination="PostCommentButton" id="PostCommentButtonOutlet"/>
+                        <outlet property="postContainerView" destination="PostContainerView" id="PostContainerViewOutlet"/>
+                        <outlet property="postContentLabel" destination="PostContentLabel" id="PostContentLabelOutlet"/>
+                        <outlet property="reportButton" destination="ReportButton" id="ReportButtonOutlet"/>
+                        <outlet property="scrollView" destination="PostDetailScrollView" id="PostDetailScrollViewOutlet"/>
+                        <outlet property="shareButton" destination="ShareButton" id="ShareButtonOutlet"/>
+                        <outlet property="timeLabel" destination="TimeLabel" id="TimeLabelOutlet"/>
+                        <outlet property="triggerWarningView" destination="TriggerWarningViewDetail" id="TriggerWarningViewOutlet"/>
+                        <outlet property="upvoteButton" destination="UpvoteButton" id="UpvoteButtonOutlet"/>
+                        <outlet property="upvoteCountLabel" destination="UpvoteCountLabel" id="UpvoteCountLabelOutlet"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PostDetailFirstResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3035" y="-447"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
+        <image name="flag" catalog="system" width="128" height="121"/>
+        <image name="folder" catalog="system" width="128" height="97"/>
+        <image name="folder.fill" catalog="system" width="128" height="97"/>
+        <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="house" catalog="system" width="128" height="106"/>
+        <image name="house.fill" catalog="system" width="128" height="106"/>
+        <image name="line.3.horizontal.decrease.circle" catalog="system" width="128" height="121"/>
+        <image name="plus.circle" catalog="system" width="128" height="121"/>
+        <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="questionmark.circle" catalog="system" width="128" height="121"/>
+        <image name="questionmark.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <systemColor name="placeholderTextColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemGroupedBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
