@@ -1,7 +1,7 @@
 # ItsUrGuy - The Real Talk App for Men
 
 
-<img src='' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='ITSURGUY/Assets.xcassets/ItsUrGuy App.dataset/ItsUrGuy App.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 
 ## Table of Contents
