@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C54D0BCC2E4CAEEB00C98DFB /* MyPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54D0BCB2E4CAEEB00C98DFB /* MyPostsViewController.swift */; };
+		C54D0BCE2E4CAFB600C98DFB /* SavedPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54D0BCD2E4CAFB600C98DFB /* SavedPostsViewController.swift */; };
+		C54D0BD02E4CB00500C98DFB /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54D0BCF2E4CB00500C98DFB /* NotificationSettingsViewController.swift */; };
+		C54D0BD22E4CB04A00C98DFB /* PrivacySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54D0BD12E4CB04A00C98DFB /* PrivacySettingsViewController.swift */; };
+		C54D0BD42E4CB08800C98DFB /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54D0BD32E4CB08800C98DFB /* AboutViewController.swift */; };
+		C54D0BD62E4CB16000C98DFB /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54D0BD52E4CB16000C98DFB /* EditProfileViewController.swift */; };
+		C54D0BDC2E4D549A00C98DFB /* SavedPostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54D0BDB2E4D549A00C98DFB /* SavedPostManager.swift */; };
 		C5C469CB2E43270E0073ADE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C469CA2E43270E0073ADE4 /* AppDelegate.swift */; };
 		C5C469CD2E43270E0073ADE4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C469CC2E43270E0073ADE4 /* SceneDelegate.swift */; };
 		C5C469CF2E43270E0073ADE4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C469CE2E43270E0073ADE4 /* ViewController.swift */; };
@@ -30,6 +37,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C54D0BCB2E4CAEEB00C98DFB /* MyPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewController.swift; sourceTree = "<group>"; };
+		C54D0BCD2E4CAFB600C98DFB /* SavedPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPostsViewController.swift; sourceTree = "<group>"; };
+		C54D0BCF2E4CB00500C98DFB /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
+		C54D0BD12E4CB04A00C98DFB /* PrivacySettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySettingsViewController.swift; sourceTree = "<group>"; };
+		C54D0BD32E4CB08800C98DFB /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		C54D0BD52E4CB16000C98DFB /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		C54D0BDB2E4D549A00C98DFB /* SavedPostManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPostManager.swift; sourceTree = "<group>"; };
 		C5C469C72E43270E0073ADE4 /* ITSURGUY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ITSURGUY.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5C469CA2E43270E0073ADE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5C469CC2E43270E0073ADE4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +119,13 @@
 				C5C469F42E45CFDA0073ADE4 /* WelcomeViewController.swift */,
 				C5C469F62E45D0120073ADE4 /* AuthenticationViewController.swift */,
 				C5C469F82E45D03E0073ADE4 /* ProfileViewController.swift */,
+				C54D0BCB2E4CAEEB00C98DFB /* MyPostsViewController.swift */,
+				C54D0BCD2E4CAFB600C98DFB /* SavedPostsViewController.swift */,
+				C54D0BCF2E4CB00500C98DFB /* NotificationSettingsViewController.swift */,
+				C54D0BD12E4CB04A00C98DFB /* PrivacySettingsViewController.swift */,
+				C54D0BD32E4CB08800C98DFB /* AboutViewController.swift */,
+				C54D0BD52E4CB16000C98DFB /* EditProfileViewController.swift */,
+				C54D0BDB2E4D549A00C98DFB /* SavedPostManager.swift */,
 			);
 			path = ITSURGUY;
 			sourceTree = "<group>";
@@ -185,9 +206,13 @@
 				C5C469E52E4331120073ADE4 /*  CreatePostViewController.swift in Sources */,
 				C5C469E72E43312A0073ADE4 /* PostDetailViewController.swift in Sources */,
 				C5C469CF2E43270E0073ADE4 /* ViewController.swift in Sources */,
+				C54D0BDC2E4D549A00C98DFB /* SavedPostManager.swift in Sources */,
 				C5C469EF2E442D7E0073ADE4 /* PostTableViewCell.swift in Sources */,
+				C54D0BCC2E4CAEEB00C98DFB /* MyPostsViewController.swift in Sources */,
 				C5C469EB2E4331530073ADE4 /*  ResourcesViewController.swift in Sources */,
 				C5C469CB2E43270E0073ADE4 /* AppDelegate.swift in Sources */,
+				C54D0BCE2E4CAFB600C98DFB /* SavedPostsViewController.swift in Sources */,
+				C54D0BD02E4CB00500C98DFB /* NotificationSettingsViewController.swift in Sources */,
 				C5C469F52E45CFDA0073ADE4 /* WelcomeViewController.swift in Sources */,
 				C5C469F12E4431EE0073ADE4 /* Comment.swift in Sources */,
 				C5C469F32E4432540073ADE4 /* CommentTableViewCell.swift in Sources */,
@@ -197,6 +222,9 @@
 				C5C469F92E45D03E0073ADE4 /* ProfileViewController.swift in Sources */,
 				C5C469E92E43313E0073ADE4 /*  CategoriesViewController.swift in Sources */,
 				C5C469E32E4330FE0073ADE4 /* HomeViewController.swift in Sources */,
+				C54D0BD42E4CB08800C98DFB /* AboutViewController.swift in Sources */,
+				C54D0BD22E4CB04A00C98DFB /* PrivacySettingsViewController.swift in Sources */,
+				C54D0BD62E4CB16000C98DFB /* EditProfileViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

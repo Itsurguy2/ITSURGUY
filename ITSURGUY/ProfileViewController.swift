@@ -270,10 +270,13 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - Actions
+   
     @objc private func editProfileTapped() {
-        // TODO: Navigate to edit profile screen
-        print("Edit Profile tapped")
+        let editProfileVC = EditProfileViewController()
+        let navController = UINavigationController(rootViewController: editProfileVC)
+        present(navController, animated: true)
     }
+
     
     @objc private func signOutTapped() {
         let alert = UIAlertController(title: "Sign Out", message: "Are you sure you want to sign out?", preferredStyle: .alert)
@@ -351,32 +354,152 @@ extension ProfileViewController: UITableViewDelegate {
     }
     
     private func navigateToMyPosts() {
-        // Navigate to user's posts
-        print("Navigate to My Posts")
+            // Create a simple posts list view controller
+            let myPostsVC = MyPostsViewController()
+            navigationController?.pushViewController(myPostsVC, animated: true)
+        }
+        
+        private func navigateToSavedPosts() {
+            let savedPostsVC = SavedPostsViewController()
+            navigationController?.pushViewController(savedPostsVC, animated: true)
+        }
+        
+        private func navigateToNotifications() {
+            let notificationsVC = NotificationSettingsViewController()
+            navigationController?.pushViewController(notificationsVC, animated: true)
+        }
+        
+        private func navigateToPrivacy() {
+            let privacyVC = PrivacySettingsViewController()
+            navigationController?.pushViewController(privacyVC, animated: true)
+        }
+        
+        private func navigateToHelp() {
+            // Navigate to the existing ResourcesViewController
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let resourcesVC = storyboard.instantiateViewController(withIdentifier: "ResourcesViewController") as? ResourcesViewController {
+                navigationController?.pushViewController(resourcesVC, animated: true)
+            } else {
+                // Fallback: create programmatically
+                let resourcesVC = ResourcesViewController()
+                navigationController?.pushViewController(resourcesVC, animated: true)
+            }
+        }
+        
+        private func navigateToAbout() {
+            let aboutVC = AboutViewController()
+            navigationController?.pushViewController(aboutVC, animated: true)
+        }
     }
     
-    private func navigateToSavedPosts() {
-        // Navigate to saved posts
-        print("Navigate to Saved Posts")
+    
+// MARK: - Simple ResourcesViewController (Programmatic)
+class SimpleResourcesViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "Help & Safety"
+        view.backgroundColor = .systemGroupedBackground
+        
+        setupUI()
     }
     
-    private func navigateToNotifications() {
-        // Navigate to notifications settings
-        print("Navigate to Notifications")
+    private func setupUI() {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Crisis Section
+        let crisisLabel = UILabel()
+        crisisLabel.text = "🆘 Crisis Resources"
+        crisisLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        crisisLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        let crisisButton = UIButton(type: .system)
+        crisisButton.setTitle("Call 988 - Suicide Prevention", for: .normal)
+        crisisButton.backgroundColor = .systemRed
+        crisisButton.setTitleColor(.white, for: .normal)
+        crisisButton.layer.cornerRadius = 8
+        crisisButton.translatesAutoresizingMaskIntoConstraints = false
+        crisisButton.addTarget(self, action: #selector(callCrisis), for: .touchUpInside)
+        
+        let textCrisisButton = UIButton(type: .system)
+        textCrisisButton.setTitle("Text 741741 - Crisis Text Line", for: .normal)
+        textCrisisButton.backgroundColor = .systemBlue
+        textCrisisButton.setTitleColor(.white, for: .normal)
+        textCrisisButton.layer.cornerRadius = 8
+        textCrisisButton.translatesAutoresizingMaskIntoConstraints = false
+        textCrisisButton.addTarget(self, action: #selector(textCrisis), for: .touchUpInside)
+        
+        // Mental Health Section
+        let mentalHealthLabel = UILabel()
+        mentalHealthLabel.text = "🧠 Mental Health Support"
+        mentalHealthLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        mentalHealthLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        let descriptionLabel = UILabel()
+        descriptionLabel.text = "• SAMHSA Helpline: 1-800-662-4357\n• BetterHelp: Online therapy\n• Crisis Text Line: Text HOME to 741741\n• Veterans Crisis Line: 1-800-273-8255"
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.font = UIFont.systemFont(ofSize: 16)
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(crisisLabel)
+        contentView.addSubview(crisisButton)
+        contentView.addSubview(textCrisisButton)
+        contentView.addSubview(mentalHealthLabel)
+        contentView.addSubview(descriptionLabel)
+        
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
+            crisisLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            crisisLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            crisisLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            
+            crisisButton.topAnchor.constraint(equalTo: crisisLabel.bottomAnchor, constant: 16),
+            crisisButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            crisisButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            crisisButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            textCrisisButton.topAnchor.constraint(equalTo: crisisButton.bottomAnchor, constant: 12),
+            textCrisisButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            textCrisisButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            textCrisisButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            mentalHealthLabel.topAnchor.constraint(equalTo: textCrisisButton.bottomAnchor, constant: 30),
+            mentalHealthLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            mentalHealthLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            
+            descriptionLabel.topAnchor.constraint(equalTo: mentalHealthLabel.bottomAnchor, constant: 16),
+            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40)
+        ])
     }
     
-    private func navigateToPrivacy() {
-        // Navigate to privacy settings
-        print("Navigate to Privacy & Security")
+    @objc private func callCrisis() {
+        if let phoneURL = URL(string: "tel://988") {
+            UIApplication.shared.open(phoneURL)
+        }
     }
     
-    private func navigateToHelp() {
-        // Navigate to help & support
-        print("Navigate to Help & Support")
-    }
-    
-    private func navigateToAbout() {
-        // Navigate to about page
-        print("Navigate to About ITSURGUY")
+    @objc private func textCrisis() {
+        if let messageURL = URL(string: "sms://741741") {
+            UIApplication.shared.open(messageURL)
+        }
     }
 }
+

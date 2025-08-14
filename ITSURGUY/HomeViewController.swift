@@ -30,36 +30,7 @@ class HomeViewController: UIViewController {
         setupUI()
         setupTableView()
         loadPosts()
-        
-        // ADD ONLY THIS LINE:
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handlePostCreated(_:)),
-            name: NSNotification.Name("PostCreated"),
-            object: nil
-        )
     }
-       
-       
-       @objc private func handlePostCreated(_ notification: Notification) {
-           
-           loadPosts()
-           
-           
-           if let newPost = notification.object as? Post {
-               
-               if currentFeedType == .recent {
-                   posts.insert(newPost, at: 0)
-                   postsTableView.reloadData()
-               }
-           }
-       }
-       
-    
-       
-       deinit {
-           NotificationCenter.default.removeObserver(self)
-       }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -227,13 +198,7 @@ class HomeViewController: UIViewController {
     
     private func generateFollowingPosts() -> [Post] {
         // For demo purposes, show some posts. In a real app, this would be empty if user follows no one
-        // Set this based on actual user following status or demo mode
-        let hasFollowing = UserDefaults.standard.bool(forKey: "userHasFollowing")
-        
-        // For demo, default to true if not set
-        if (UserDefaults.standard.object(forKey: "userHasFollowing") == nil) != nil {
-            UserDefaults.standard.set(true, forKey: "userHasFollowing")
-        }
+        let hasFollowing = true // Change to false to test empty state
         
         if !hasFollowing {
             return [] // Return empty array to show empty state
@@ -372,8 +337,34 @@ class HomeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showPostDetail",
            let destinationVC = segue.destination as? PostDetailViewController,
-           let indexPath = postsTableView.indexPathForSelectedRow {
-            destinationVC.post = posts[indexPath.row]
+           let indexPath = sender as? IndexPath {
+            
+            let selectedPost = posts[indexPath.row]
+            print("🟢 Passing post via segue: \(selectedPost.content)")
+            destinationVC.post = selectedPost
+        }
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        print("🟢 Cell tapped at row: \(indexPath.row)")
+        print("🟢 Posts array count: \(posts.count)")
+        
+        guard indexPath.row < posts.count else {
+            print("🔴 Index out of range!")
+            return
+        }
+        
+        let selectedPost = posts[indexPath.row]
+        print("🟢 Selected post content: \(selectedPost.content)")
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let postDetailVC = storyboard.instantiateViewController(withIdentifier: "PostDetailViewController") as? PostDetailViewController {
+            postDetailVC.post = selectedPost
+            print("🟢 Post assigned successfully!")
+            navigationController?.pushViewController(postDetailVC, animated: true)
+        } else {
+            print("🔴 Could not create PostDetailViewController")
         }
     }
     
@@ -478,11 +469,7 @@ extension HomeViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension HomeViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: "showPostDetail", sender: nil)
-    }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
@@ -515,8 +502,6 @@ extension HomeViewController: PostTableViewCellDelegate {
         }
     }
 }
-
-
 
 // MARK: - Supporting Enums
 enum VoteType {

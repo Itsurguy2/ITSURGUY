@@ -1,6 +1,6 @@
 import Foundation
 
-struct Post {
+struct Post: Codable, Equatable {
     let id: String
     let anonymousHandle: String
     let content: String
@@ -14,6 +14,10 @@ struct Post {
     let isReported: Bool
     let hasTriggerWarning: Bool
     
+    static func == (lhs: Post, rhs: Post) -> Bool {
+            return lhs.id == rhs.id
+        }
+
     init(id: String, anonymousHandle: String, content: String, category: PostCategory, upvotes: Int, downvotes: Int, commentCount: Int, timeAgo: String, hasUserVoted: Bool, imageUrl: String? = nil, isReported: Bool = false, hasTriggerWarning: Bool = false) {
         self.id = id
         self.anonymousHandle = anonymousHandle
@@ -30,7 +34,8 @@ struct Post {
     }
 }
 
-enum PostCategory: String, CaseIterable {
+
+enum PostCategory: String, CaseIterable, Codable {
     case realTalk = "Real Talk"
     case workLife = "Work Life"
     case mentalHealth = "Mental Health"

@@ -1,6 +1,6 @@
 import Foundation
 
-struct Comment {
+struct Comment: Codable, Equatable {
     let id: String
     let postId: String
     let anonymousHandle: String

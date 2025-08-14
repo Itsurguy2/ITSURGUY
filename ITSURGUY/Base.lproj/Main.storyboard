@@ -358,7 +358,7 @@
         <!--Help & Safety-->
         <scene sceneID="ResourcesScene">
             <objects>
-                <viewController id="ResourcesViewController" customClass="ResourcesViewController" customModule="ITSURGUY" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResourcesViewController" id="ResourcesViewController" customClass="ResourcesViewController" customModule="ITSURGUY" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ResourcesView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -500,7 +500,7 @@
         <!--Post Details-->
         <scene sceneID="PostDetailScene">
             <objects>
-                <viewController id="PostDetailViewController" customClass="PostDetailViewController" customModule="ITSURGUY" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PostDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="PostDetailViewController" customClass="PostDetailViewController" customModule="ITSURGUY" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PostDetailView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

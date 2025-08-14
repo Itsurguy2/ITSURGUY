@@ -39,6 +39,12 @@ class PostDetailViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("🔴 PostDetailViewController viewDidLoad - YOU ARE ON POST DETAIL SCREEN")
+        if let currentPost = post {
+                print("🟢 Post is set: \(currentPost.content)")
+            } else {
+                print("🔴 ERROR: Post is nil! Cannot display post details or add comments.")
+            }
         setupUI()
         setupTableView()
         setupCommentTextView()
@@ -46,7 +52,56 @@ class PostDetailViewController: UIViewController {
         loadComments()
     }
     
+    
+    
     // MARK: - Setup Methods
+    
+    private func postComment() {
+        guard let currentPost = post else {
+            print("Error: post is nil, cannot post comment")
+            let alert = UIAlertController(title: "Error", message: "Unable to post comment. Please try again.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+            return
+        }
+        
+        guard commentTextView.textColor != UIColor.placeholderText,
+              !commentTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            return
+        }
+        
+        let commentText = commentTextView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        let newComment = Comment(
+            id: UUID().uuidString,
+            postId: currentPost.id,
+            anonymousHandle: "Anonymous Guy #\(Int.random(in: 100...999))",
+            content: commentText,
+            upvotes: 0,
+            downvotes: 0,
+            timeAgo: "now",
+            hasUserVoted: false,
+            timestamp: Date()
+        )
+
+        comments.insert(newComment, at: 0)
+        commentsTableView.reloadData()
+        updateTableViewHeight()
+        
+        commentTextView.text = "Share your thoughts anonymously..."
+        commentTextView.textColor = UIColor.placeholderText
+        postCommentButton.isEnabled = false
+        commentTextView.resignFirstResponder()
+        
+        let alert = UIAlertController(
+            title: "Comment Posted",
+            message: "Your anonymous comment has been added.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
     private func setupUI() {
         title = "Post Details"
         
@@ -199,7 +254,9 @@ class PostDetailViewController: UIViewController {
     
     private func updateTableViewHeight() {
         commentsTableView.layoutIfNeeded()
-        commentsTableViewHeightConstraint.constant = commentsTableView.contentSize.height
+        let maxHeight: CGFloat = 400  // Set a maximum height
+        let contentHeight = commentsTableView.contentSize.height
+        commentsTableViewHeightConstraint.constant = min(contentHeight, maxHeight)
         view.layoutIfNeeded()
     }
     
@@ -221,6 +278,8 @@ class PostDetailViewController: UIViewController {
     }
     
     @IBAction func postCommentButtonTapped(_ sender: UIButton) {
+        print("🔴 PostDetailViewController postCommentButtonTapped - THIS IS THE COMMENT BUTTON")
+            postComment()
         postComment()
     }
     
@@ -314,7 +373,7 @@ class PostDetailViewController: UIViewController {
     }
     
     private func submitReport(reason: String) {
-        print("Reporting post \(post?.id) for reason: \(reason)")
+        print("Reporting post  \(post?.id ?? "unknown") for reason: \(reason)")
         
         let alert = UIAlertController(
             title: "Report Submitted",
@@ -352,12 +411,12 @@ class PostDetailViewController: UIViewController {
     private func blockUser() {
         let alert = UIAlertController(
             title: "Block User",
-            message: "You won't see posts from \(post?.anonymousHandle) anymore. This action can be undone in settings.",
+            message: "You won't see posts from \(post?.anonymousHandle ?? ("unkonown")) anymore. This action can be undone in settings.",
             preferredStyle: .alert
         )
         
         alert.addAction(UIAlertAction(title: "Block", style: .destructive) { _ in
-            print("Blocked user: \(self.post?.anonymousHandle)")
+            print("Blocked user: \(self.post?.anonymousHandle ?? ("unkonown"))")
         })
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
@@ -366,7 +425,7 @@ class PostDetailViewController: UIViewController {
     }
     
     private func savePost() {
-        print("Saved post: \(post?.id)")
+        print("Saved post: \(post?.id ?? ("unkonown"))")
         
         let alert = UIAlertController(
             title: "Post Saved",
@@ -389,43 +448,6 @@ class PostDetailViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    private func postComment() {
-        guard let post = post else {
-            print("Error: post is nil, cannot post comment")
-            return
-        }
-        
-        let commentText = commentTextView.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        let newComment = Comment(
-            id: UUID().uuidString,
-            postId: post.id,
-            anonymousHandle: "Anonymous Guy #\(Int.random(in: 100...999))",
-            content: commentText,
-            upvotes: 0,
-            downvotes: 0,
-            timeAgo: "now",
-            hasUserVoted: false,
-            timestamp: Date()
-        )
-
-        comments.insert(newComment, at: 0)
-        commentsTableView.reloadData()
-        updateTableViewHeight()
-        
-        commentTextView.text = "Share your thoughts anonymously..."
-        commentTextView.textColor = UIColor.placeholderText
-        postCommentButton.isEnabled = false
-        commentTextView.resignFirstResponder()
-        
-        let alert = UIAlertController(
-            title: "Comment Posted",
-            message: "Your anonymous comment has been added.",
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
 
     private func generateAvatarInitials(from handle: String) -> String {
         let components = handle.components(separatedBy: "#")

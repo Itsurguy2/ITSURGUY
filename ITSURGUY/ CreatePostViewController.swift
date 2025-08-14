@@ -8,7 +8,11 @@
 
 import UIKit
 
-class CreatePostViewController: UIViewController {
+class CreatePostViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    
+    @IBAction func tempAction(_ sender: Any) {}
+    
+    
     
     // MARK: - IBOutlets
     @IBOutlet weak var categorySegmentedControl: UISegmentedControl!
@@ -21,6 +25,7 @@ class CreatePostViewController: UIViewController {
     @IBOutlet weak var crisisHelpButton: UIButton!
     @IBOutlet weak var postButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
+  
     
     // MARK: - Properties
     private let maxCharacterCount = 500
@@ -28,12 +33,35 @@ class CreatePostViewController: UIViewController {
     private var hasPhoto = false
     private var crisisKeywords = ["suicide", "kill myself", "end it all", "hurt myself", "can't go on", "no point", "want to die"]
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            picker.dismiss(animated: true)
+            
+        if (info[.editedImage] as? UIImage ?? info[.originalImage] as? UIImage) != nil {
+                simulatePhotoAdded()
+                print("Photo selected successfully")
+            }
+        }
+        
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            picker.dismiss(animated: true)
+        }
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("🟢 CreatePostViewController viewDidLoad - YOU ARE ON CREATE POST SCREEN")
         setupUI()
         setupTextView()
         checkCrisisDetection()
+        
+        // DEBUG: Check if Post button exists
+        if let postBtn = postButton {
+            print("🟢 Post button exists: \(postBtn)")
+            print("🟢 Post button enabled: \(postBtn.isEnabled)")
+            print("🟢 Post button title: \(postBtn.title ?? "no title")")
+        } else {
+            print("🔴 ERROR: Post button is nil!")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,8 +74,13 @@ class CreatePostViewController: UIViewController {
     private func setupUI() {
         title = "New Post"
         
-        // Setup navigation buttons
+        // Setup navigation buttons - ADD THESE LINES:
+        postButton.target = self
+        postButton.action = #selector(postButtonTapped(_:))
         postButton.isEnabled = false
+        
+        cancelButton.target = self
+        cancelButton.action = #selector(cancelButtonTapped(_:))
         
         // Setup category segmented control
         setupCategorySegmentedControl()
@@ -60,11 +93,14 @@ class CreatePostViewController: UIViewController {
         crisisDetectionView.backgroundColor = UIColor.systemYellow.withAlphaComponent(0.1)
         crisisDetectionView.layer.cornerRadius = 8
         crisisDetectionView.isHidden = true
-        
+
+
         crisisHelpButton.setTitle("Get Immediate Help", for: .normal)
         crisisHelpButton.backgroundColor = UIColor.systemRed
         crisisHelpButton.setTitleColor(.white, for: .normal)
         crisisHelpButton.layer.cornerRadius = 8
+        // FIX: Use 'self' instead of 'nil'
+        crisisHelpButton.addTarget(self, action: #selector(crisisHelpButtonTapped(_:)), for: .touchUpInside)
         
         // Setup add photo button
         addPhotoButton.setTitle("📸 Add Anonymous Photo", for: .normal)
@@ -73,6 +109,8 @@ class CreatePostViewController: UIViewController {
         addPhotoButton.layer.cornerRadius = 8
         addPhotoButton.layer.borderWidth = 1
         addPhotoButton.layer.borderColor = UIColor.systemBlue.cgColor
+        // FIX: Use 'self' instead of 'nil'
+        addPhotoButton.addTarget(self, action: #selector(addPhotoButtonTapped(_:)), for: .touchUpInside)
         
         // Character count
         updateCharacterCount()
@@ -102,6 +140,11 @@ class CreatePostViewController: UIViewController {
     }
     
     // MARK: - IBActions
+    @IBAction func postButtonTapped(_ sender: UIBarButtonItem) {
+        print("🟢 CreatePostViewController postButtonTapped - THIS IS THE CREATE POST BUTTON")
+        createPost()
+    }
+
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         if !postContentTextView.text.isEmpty && postContentTextView.textColor != UIColor.placeholderText {
             showDiscardConfirmation()
@@ -109,27 +152,29 @@ class CreatePostViewController: UIViewController {
             dismiss(animated: true)
         }
     }
-    
-    @IBAction func postButtonTapped(_ sender: UIBarButtonItem) {
-        createPost()
-    }
-    
-    @IBAction func addPhotoButtonTapped(_ sender: UIButton) {
+
+    @objc private func addPhotoButtonTapped(_ sender: UIButton) {
         showPhotoOptions()
     }
-    
-    @IBAction func crisisHelpButtonTapped(_ sender: UIButton) {
+
+    @objc private func crisisHelpButtonTapped(_ sender: UIButton) {
         showCrisisResources()
     }
-    
+
     @objc private func categoryChanged(_ sender: UISegmentedControl) {
         let categories: [PostCategory] = [.realTalk, .workLife, .mentalHealth, .relationships]
         selectedCategory = categories[sender.selectedSegmentIndex]
     }
     
+    
+    
     // MARK: - Helper Methods
     private func updateCharacterCount() {
-        let currentCount = postContentTextView.textColor == UIColor.placeholderText ? 0 : postContentTextView.text.count
+        let currentText = postContentTextView.text ?? ""
+        let isPlaceholder = postContentTextView.textColor == UIColor.placeholderText
+        let actualText = isPlaceholder ? "" : currentText
+        let currentCount = actualText.count
+        
         characterCountLabel.text = "\(currentCount)/\(maxCharacterCount)"
         
         if currentCount > maxCharacterCount {
@@ -140,14 +185,15 @@ class CreatePostViewController: UIViewController {
             characterCountLabel.textColor = UIColor.secondaryLabel
         }
         
-        // Enable/disable post button - FIXED LOGIC
-        let hasValidText = postContentTextView.textColor != UIColor.placeholderText &&
-                          !postContentTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
-                          currentCount > 0 && currentCount <= maxCharacterCount
+        // FIXED: Enable/disable post button
+        let hasValidText = !isPlaceholder &&
+                          !actualText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+                          currentCount > 0 &&
+                          currentCount <= maxCharacterCount
         
         postButton.isEnabled = hasValidText
         
-        print("DEBUG: Text count: \(currentCount), hasValidText: \(hasValidText), button enabled: \(postButton.isEnabled)")
+        print("DEBUG: Text: '\(actualText)', count: \(currentCount), isPlaceholder: \(isPlaceholder), button enabled: \(hasValidText)")
     }
     
     private func checkCrisisDetection() {
@@ -245,18 +291,29 @@ class CreatePostViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    private func openCamera() {
-        // Implementation for camera access
-        print("Opening camera...")
-        // Note: In real implementation, you'd use UIImagePickerController
-        simulatePhotoAdded()
-    }
-    
     private func openPhotoLibrary() {
-        // Implementation for photo library access
         print("Opening photo library...")
-        // Note: In real implementation, you'd use UIImagePickerController
-        simulatePhotoAdded()
+        
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = true
+        present(imagePicker, animated: true)
+    }
+
+    private func openCamera() {
+        print("Opening camera...")
+        
+        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+            print("Camera not available")
+            return
+        }
+        
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .camera
+        imagePicker.allowsEditing = true
+        present(imagePicker, animated: true)
     }
     
     private func simulatePhotoAdded() {
@@ -268,6 +325,9 @@ class CreatePostViewController: UIViewController {
     }
     
     private func createPost() {
+        
+        print("DEBUG: createPost() method called - THIS IS CORRECT")
+        
         // Check if we have valid content
         guard postContentTextView.textColor != UIColor.placeholderText,
               !postContentTextView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
@@ -421,4 +481,5 @@ extension CreatePostViewController {
         
         return containsCrisisPhrase || (containsSuicidalWord && containsNegativeWord)
     }
+    
 }
