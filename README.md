@@ -1,5 +1,9 @@
 # ItsUrGuy - The Real Talk App for Men
 
+
+<img src='' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+
 ## Table of Contents
 1. [Overview](#overview)
 2. [Product Spec](#product-spec)
